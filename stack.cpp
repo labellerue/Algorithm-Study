@@ -14,7 +14,7 @@ int main(void){
 	s.pop();
 	
 	while(!s.empty()){
-		cout << s.top() << ' '; //°¡Àå À§ Ãâ·Â 
+		cout << s.top() << ' '; //ê°€ìž¥ ìœ„ 
 		s.pop();
 	}
 	
