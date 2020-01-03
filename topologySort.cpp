@@ -26,25 +26,24 @@ void topology(){
 	
 	//1번의 첫 실행 
 	for(int i=1 ; i<=n ; i++){
-		if(inDegree[i] == 0) q.push(i);
+		if(inDegree[i] == 0) q.push(i); //ex)1
 	}
 	//모든 원소를 방문해야 함 
 	for(int i=1 ; i<=n ; i++){
-		if(q.empty()){
+		if(q.empty()){ //진입차수가 0인 것이 없다면 시작점이 없는 것. 
 			printf("사이클이 존재합니다.");
 			return;
 		}
-		//2번 실행
-		int x = q.front();
-		q.pop();
-		result[i] = x;
 		
-		for(int j=0 ; j<a[x].size() ; j++){
-			int y = a[x][j];
-			//2번 실행. 진입차수 -1 해주기.
-			//3번 실행. 진입차수가 0이 되면 큐에 삽입. 
-			if(--inDegree[y] == 0){
-				q.push(y);
+		int x = q.front(); //java에서 pop을 실행하면 그 값이 return 되지만 
+		q.pop();		   //C++는 return값이 없음. 
+		result[i] = x;	   //ex)1
+		
+		for(int j=0 ; j<a[x].size() ; j++){ //진입차수가 0인 점이 향하는 곳  ex)1이 향하는 곳: 2,5
+			int y = a[x][j];				//ex) a[1][2]는 3 
+			
+			if(--inDegree[y] == 0){ //2번 실행. 향하는 곳의 진입차수 -1 해주기. ex)inDegree[3]는 1 
+				q.push(y); //3번 실행. 진입차수가 0이 되면 큐에 삽입. ex)3 for문을 돌며 1이 향하는 모든 경우을 작업함
 			}
 		}
 	}
@@ -54,7 +53,7 @@ void topology(){
 }
 
 int main(void){
-		
+	
 	//↗2->3->4
 	//1     ↙ 
 	//↘5->6->7
@@ -84,5 +83,4 @@ int main(void){
 //O(V+E)
 //점의 갯수 + 간선의 갯수 만큼 시간이 소요됨.
 //매우 빠름 
-
 
